@@ -1,5 +1,4 @@
+from .base_model import *  # noqa
+from .inventory import *  # noqa
 from .product import *  # noqa
-
-# from .sale import *
-# from .inventory import *
-# from .base_model import *
+from .sale import *  # noqa

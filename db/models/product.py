@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, Numeric, String
 from sqlalchemy.orm import relationship
 
 from db.models.base_model import CreatedUpdatedAtModel
@@ -31,6 +31,8 @@ class Product(CreatedUpdatedAtModel, Base):
     id = Column(Integer, primary_key=True, index=True)
     sku_code = Column(String(length=50), unique=True, index=True)
     design_no = Column(String(length=50), index=True)
+    description = Column(String, nullable=True)
+    price = Column(Numeric(10, 2))
 
     # Relationships
     category_id = Column(Integer, ForeignKey("categories.id"))
@@ -38,4 +40,5 @@ class Product(CreatedUpdatedAtModel, Base):
 
     category = relationship("Category", back_populates="products")
     size = relationship("Size", back_populates="products")
-    # orders = relationship("Order", back_populates="product")
+    orders = relationship("Order", back_populates="product")
+    inventory = relationship("Inventory", back_populates="product")
