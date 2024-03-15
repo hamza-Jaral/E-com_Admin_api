@@ -1,57 +1,40 @@
-# Oil and Gas Dashboard
+# FastAPI: E-commerce Admin API
+
+This API provides detailed insights into sales, revenue, and inventory status, as well as allow new product registration
 
 ## Installation
 
-1. Install conda environment
+1. Clone the repository:
 
-```
-conda create --name vapourware python=3.11.5
-```
+   ```bash
+   git clone <https://github.com/hamza-Jaral/E-com_Admin_api.git>
+   cd <project_directory>
+   ```
+2. Create and activate a virtual environment:
 
-2. Activate conda environment
+    ```python3 -m venv venv```
 
-```
-conda activate vapourware
-```
+    ```source venv/bin/activate```
 
-3. Install requirements
+3. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+## Database Setup
 
-```
-pip install -r requirements.txt
-```
+1. Initialize the database:
 
-4. Connect with Database go to .env.example file and fill the variables
-5. rename .env.example to .env
-6. Run Alembric migrations
+    ```bash
+    alembic upgrade head
+    ```
+2. Load the data:
+    ```bash
+    python load_data.py
+   ```
 
-```
-alembic upgrade head
-```
-
-7. Run the app
-
-```
-uvicorn main:app --reload
-```
-
-5. Open the app in your browser
-
-```
-http://localhost:8000/
-```
-
-#### Updates
-1. Make the necessary changes to model
-2. Generate an Alembic migration script using the following command:
-```
-$ poetry shell
-> alembic revision --autogenerate -m <name_of_migration>
-```
-3. Apply the migration to update the database schema:
-```
-alembic upgrade head
-```
-4. Downgrade **(if necessary)** to a previous revision using the following command:
-```
-alembic downgrade <revision>
-```
+## Usage
+1. Run the FastAPI server:
+    ```bash
+    uvicorn app.main:app --reload
+    ```
+2. Visit http://localhost:8000/docs in your browser to access the Swagger UI for API documentation.

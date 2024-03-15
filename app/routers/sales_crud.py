@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi_pagination import Page, paginate
 from sqlalchemy.orm import Session
 
 from app.schemas.order import Order as OrderSchema
@@ -6,7 +7,7 @@ from app.schemas.order import OrderCreate
 from db.database import get_db
 from db.models.sale import Order
 
-router = APIRouter(prefix="/orders", tags=["orders"])
+router = APIRouter(prefix="/orders", tags=["Orders"])
 
 
 @router.post("/", response_model=OrderSchema)
@@ -16,6 +17,11 @@ def create_order(order: OrderCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_order)
     return db_order
+
+
+@router.get("/", response_model=Page[OrderSchema])
+def read_sales(db: Session = Depends(get_db)):
+    return paginate(db.query(Order).all())
 
 
 @router.get("/{order_id}", response_model=OrderSchema)

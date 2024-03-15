@@ -19,3 +19,8 @@ class Order(OrderBase):
 
     class Config:
         from_attributes = True
+
+
+class DateRange(BaseModel):
+    start_date: datetime
+    end_date: datetime
